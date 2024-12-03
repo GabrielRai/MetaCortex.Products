@@ -19,4 +19,8 @@
     <Folder Include="Endpoints\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MetaCortex.Products.DataAccess\MetaCortex.Products.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

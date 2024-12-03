@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ namespace MetaCortex.Products.DataAccess.Interface
     public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetProducts();
-        Task<Product> GetProduct(string id);
+        Task<Product> GetProduct(ObjectId id);
         Task<Product> CreateProduct(Product product);
-        Task UpdateProduct(string id, Product product);
-        Task DeleteProduct(string id);
+        Task UpdateProduct(ObjectId id, Product product);
+        Task DeleteProduct(ObjectId id);
     }
 }
