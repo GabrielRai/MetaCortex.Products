@@ -9,36 +9,44 @@ namespace MetaCortex.Products.API.Endpoints
     {
         public static IEndpointRouteBuilder MapProductEndpoints(this IEndpointRouteBuilder app)
         {
-            var repository = app.ServiceProvider.GetRequiredService<IProductRepository>();
-
-            app.MapGet("/products", async (IProductRepository repository) =>
-            {
-                return await repository.GetProducts();
-            });
-
-            app.MapGet("/products/{id}", async (IProductRepository repository, string id) =>
-            {
-                return await repository.GetProduct(id);
-            });
-
-            app.MapPost("/products", async (IProductRepository repository, Product product) =>
-            {
-                return await repository.CreateProduct(product);
-            });
-
-            app.MapPut("/products/{id}", async (IProductRepository repository, string id, Product product) =>
-            {
-                await repository.UpdateProduct(id, product);
-                return Results.NoContent();
-            });
-
-            app.MapDelete("/products/{id}", async (IProductRepository repository, string id) =>
-            {
-                await repository.DeleteProduct(id);
-                return Results.NoContent();
-            });
+            var group = app.MapGroup("api/products");
+            group.MapPost("", CreateProduct);
+            group.MapGet("{Id}", GetProductById);
+            group.MapGet("", GetAllProducts);
+            group.MapDelete("{Id}", DeleteProduct);
+            group.MapPut("{Id}", UpdateProduct);
 
             return app;
+        }
+
+        public static async Task<IResult> CreateProduct(IProductRepository repo, Product product)
+        {
+            var createdProduct = await repo.CreateProduct(product);
+            return Results.Created($"/api/products/{createdProduct.Id}", createdProduct);
+        }
+        public static async Task<IResult> GetProductById(IProductRepository repo, string Id)
+        {
+            var product = await repo.GetProduct(Id);
+            if (product == null)
+            {
+                return Results.NotFound();
+            }
+            return Results.Ok(product);
+        }
+        public static async Task<IResult> GetAllProducts(IProductRepository repo)
+        {
+            var products = await repo.GetProducts();
+            return Results.Ok(products);
+        }
+        public static async Task<IResult> DeleteProduct(IProductRepository repo, string Id)
+        {
+            await repo.DeleteProduct(Id);
+            return Results.NoContent();
+        }
+        public static async Task<IResult> UpdateProduct(IProductRepository repo, string Id, Product product)
+        {
+            await repo.UpdateProduct(Id, product);
+            return Results.NoContent();
         }
     }
 }
