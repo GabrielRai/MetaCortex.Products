@@ -29,25 +29,18 @@ namespace MetaCortex.Products.DataAccess.Repository
         {
             return await _products.Find(p => p.Id == id).FirstOrDefaultAsync();
         }
-        public Task<Product> CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
-            if (product != null)
-            {
-                _products.InsertOne(product);
-                return Task.FromResult(product);
-            }
-            return Task.FromResult<Product>(null);
-
+            await _products.InsertOneAsync(product);
+            return product;
         }
-        public Task UpdateProduct(ObjectId id, Product product)
+        public async Task UpdateProduct(ObjectId id, Product product)
         {
-            _products.ReplaceOne(p => p.Id == id, product);
-            return Task.FromResult(product);
+            await _products.ReplaceOneAsync(p => p.Id == id, product);
         }
-        public Task DeleteProduct(ObjectId id)
+        public async Task DeleteProduct(ObjectId id)
         {
-            _products.DeleteOne(p => p.Id == id);
-            return Task.CompletedTask;
+            await _products.DeleteOneAsync(p => p.Id == id);
         }
     }
 }
