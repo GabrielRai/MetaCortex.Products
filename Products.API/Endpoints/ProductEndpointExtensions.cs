@@ -10,6 +10,7 @@ namespace MetaCortex.Products.API.Endpoints
         public static IEndpointRouteBuilder MapProductEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("api/products");
+
             group.MapPost("", CreateProduct);
             group.MapGet("{Id}", GetProductById);
             group.MapGet("", GetAllProducts);
