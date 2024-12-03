@@ -11,9 +11,9 @@ namespace MetaCortex.Products.DataAccess.Interface
     public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetProducts();
-        Task<Product> GetProduct(ObjectId id);
+        Task<Product> GetProduct(string id);
         Task<Product> CreateProduct(Product product);
-        Task UpdateProduct(ObjectId id, Product product);
-        Task DeleteProduct(ObjectId id);
+        Task UpdateProduct(string id, Product product);
+        Task DeleteProduct(string id);
     }
 }

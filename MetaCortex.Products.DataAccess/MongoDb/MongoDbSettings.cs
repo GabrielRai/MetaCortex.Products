@@ -10,7 +10,7 @@ namespace MetaCortex.Products.DataAccess.MongoDb
     {
         public string Host { get; set; }
         public int Port { get; set; }
-        public string Database { get; set; }
+        public string DatabaseName { get; set; }
         public string CollectionName { get; set; }
     }
 }

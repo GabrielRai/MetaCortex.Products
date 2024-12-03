@@ -18,14 +18,15 @@ namespace MetaCortex.Products.DataAccess.Repository
         private readonly IMongoCollection<Product> _products;
         public ProductRepository(IMongoClient mongoClient, IOptions<MongoDbSettings> mongoDbSettings)
         {
-            var database = mongoClient.GetDatabase(mongoDbSettings.Value.Database);
+            var settings = mongoDbSettings.Value;
+            var database = mongoClient.GetDatabase(settings.DatabaseName);
             _products = database.GetCollection<Product>(mongoDbSettings.Value.CollectionName, new MongoCollectionSettings { AssignIdOnInsert = true });
         }
         public async Task<IEnumerable<Product>> GetProducts()
         {
             return await _products.Find(p => true).ToListAsync();
         }
-        public async Task<Product> GetProduct(ObjectId id)
+        public async Task<Product> GetProduct(string id)
         {
             return await _products.Find(p => p.Id == id).FirstOrDefaultAsync();
         }
@@ -34,11 +35,11 @@ namespace MetaCortex.Products.DataAccess.Repository
             await _products.InsertOneAsync(product);
             return product;
         }
-        public async Task UpdateProduct(ObjectId id, Product product)
+        public async Task UpdateProduct(string id, Product product)
         {
             await _products.ReplaceOneAsync(p => p.Id == id, product);
         }
-        public async Task DeleteProduct(ObjectId id)
+        public async Task DeleteProduct(string id)
         {
             await _products.DeleteOneAsync(p => p.Id == id);
         }

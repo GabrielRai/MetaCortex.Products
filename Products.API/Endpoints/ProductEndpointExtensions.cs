@@ -16,7 +16,7 @@ namespace MetaCortex.Products.API.Endpoints
                 return await repository.GetProducts();
             });
 
-            app.MapGet("/products/{id}", async (IProductRepository repository, ObjectId id) =>
+            app.MapGet("/products/{id}", async (IProductRepository repository, string id) =>
             {
                 return await repository.GetProduct(id);
             });
@@ -26,13 +26,13 @@ namespace MetaCortex.Products.API.Endpoints
                 return await repository.CreateProduct(product);
             });
 
-            app.MapPut("/products/{id}", async (IProductRepository repository, ObjectId id, Product product) =>
+            app.MapPut("/products/{id}", async (IProductRepository repository, string id, Product product) =>
             {
                 await repository.UpdateProduct(id, product);
                 return Results.NoContent();
             });
 
-            app.MapDelete("/products/{id}", async (IProductRepository repository, ObjectId id) =>
+            app.MapDelete("/products/{id}", async (IProductRepository repository, string id) =>
             {
                 await repository.DeleteProduct(id);
                 return Results.NoContent();
