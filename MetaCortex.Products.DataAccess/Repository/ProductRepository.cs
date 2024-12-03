@@ -1,4 +1,6 @@
-﻿using MetaCortex.Products.DataAccess.Interface;
+﻿using MetaCortex.Products.DataAccess.Class;
+using MetaCortex.Products.DataAccess.Interface;
+using MetaCortex.Products.DataAccess.MongoDb;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -8,11 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MetaCortex.Products.DataAccess
+namespace MetaCortex.Products.DataAccess.Repository
 {
     public class ProductRepository : IProductRepository
     {
-      
+
         private readonly IMongoCollection<Product> _products;
         public ProductRepository(IMongoClient mongoClient, IOptions<MongoDbSettings> mongoDbSettings)
         {
@@ -29,7 +31,7 @@ namespace MetaCortex.Products.DataAccess
         }
         public Task<Product> CreateProduct(Product product)
         {
-            if(product != null)
+            if (product != null)
             {
                 _products.InsertOne(product);
                 return Task.FromResult(product);

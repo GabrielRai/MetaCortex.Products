@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MetaCortex.Products.DataAccess
+namespace MetaCortex.Products.DataAccess.MongoDb
 {
     public class MongoDbSettings
     {

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using System.ComponentModel;
 
-namespace MetaCortex.Products.DataAccess
+namespace MetaCortex.Products.DataAccess.Class
 {
     public class Product
     {
