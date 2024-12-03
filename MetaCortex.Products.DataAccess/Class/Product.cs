@@ -3,9 +3,9 @@ using System.ComponentModel;
 
 namespace MetaCortex.Products.DataAccess.Class
 {
-    public class Product
+    public class Product : EntityBase
     {
-        public ObjectId Id { get; set; }
+        public ObjectId ProductId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
     }
