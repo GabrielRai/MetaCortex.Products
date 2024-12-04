@@ -1,18 +1,31 @@
-# API Dokumentation för `ProductEndpointExtensions`
+# Group Project: Microservices
 
-Detta API hanterar CRUD-operationer (Create, Read, Update, Delete) för `Product`-entiteter. Nedan följer en detaljerad beskrivning av tillgängliga endpoints, deras parametrar och svar.
+This repository is part of a group project where we are developing a distributed application composed of several microservices. Each team member is responsible for a specific part of the system:
+
+- MetaCortex.Customers - Maintained by me, responsible for customer management (this repository).
+- [MetaCortex.Orders](https://github.com/anders0b/MetaCortex.Orders) - Maintained by [Anders0b](https://github.com/anders0b), responsible for order management.
+- [MetaCortex.Customers](https://github.com/JesperWhendin/MetaCortex.Customers) - Maintained by [JesperWendin](https://github.com/JesperWendin), responsible for customer information.
+- [MetaCortex.Payments](https://github.com/Heimbrand/MetaCortex.Payments) - Maintained by [Heimbrand](https://github.com/Heimbrand), responsible for handling payments.
+
+Together, these microservices, as well as an API-Gateway, form a complete system where each service has a clear role and responsibility.
 
 ---
 
-## **Hämta alla produkter**
+# API Dokumentation fÃ¶r `ProductEndpointExtensions`
+
+Detta API hanterar CRUD-operationer (Create, Read, Update, Delete) fÃ¶r `Product`-entiteter. Nedan fÃ¶ljer en detaljerad beskrivning av tillgÃ¤ngliga endpoints, deras parametrar och svar.
+
+---
+
+## **HÃ¤mta alla produkter**
 - **Metod:** `GET`
 - **Endpoint:** `/products`
-- **Beskrivning:** Hämtar en lista med alla produkter.
+- **Beskrivning:** HÃ¤mtar en lista med alla produkter.
 - **Request:**
-  - Ingen body behövs.
+  - Ingen body behÃ¶vs.
 - **Response:**
   - **200 OK:** Returnerar en lista av produkter i JSON-format.
-  - **Exempel på svar:**
+  - **Exempel pÃ¥ svar:**
     ```json
     [
       {
@@ -30,15 +43,15 @@ Detta API hanterar CRUD-operationer (Create, Read, Update, Delete) för `Product`
 
 ---
 
-## **Hämta en produkt**
+## **HÃ¤mta en produkt**
 - **Metod:** `GET`
 - **Endpoint:** `/products/{id}`
-- **Beskrivning:** Hämtar detaljer om en specifik produkt baserat på ID.
+- **Beskrivning:** HÃ¤mtar detaljer om en specifik produkt baserat pÃ¥ ID.
 - **Parametrar:**
   - **Path Parameter:**
-    - `id` (string): ID för produkten som ska hämtas.
+    - `id` (string): ID fÃ¶r produkten som ska hÃ¤mtas.
 - **Request:**
-  - Ingen body behövs.
+  - Ingen body behÃ¶vs.
 - **Response:**
   - **200 OK:** Returnerar produkten som JSON.
     ```json
@@ -73,19 +86,19 @@ Detta API hanterar CRUD-operationer (Create, Read, Update, Delete) för `Product`
       "price": 12000.50
     }
     ```
-  - **400 Bad Request:** Om datan i requesten är ogiltig.
+  - **400 Bad Request:** Om datan i requesten Ã¤r ogiltig.
 
 ---
 
 ## **Uppdatera en produkt**
 - **Metod:** `PUT`
 - **Endpoint:** `/products/{id}`
-- **Beskrivning:** Uppdaterar en befintlig produkt baserat på ID.
+- **Beskrivning:** Uppdaterar en befintlig produkt baserat pÃ¥ ID.
 - **Parametrar:**
   - **Path Parameter:**
-    - `id` (string): ID för produkten som ska uppdateras.
+    - `id` (string): ID fÃ¶r produkten som ska uppdateras.
 - **Request:**
-  - **Body:** JSON som innehåller de nya produktuppgifterna.
+  - **Body:** JSON som innehÃ¥ller de nya produktuppgifterna.
     ```json
     {
       "name": "Smartphone",
@@ -101,12 +114,12 @@ Detta API hanterar CRUD-operationer (Create, Read, Update, Delete) för `Product`
 ## **Radera en produkt**
 - **Metod:** `DELETE`
 - **Endpoint:** `/products/{id}`
-- **Beskrivning:** Raderar en produkt baserat på ID.
+- **Beskrivning:** Raderar en produkt baserat pÃ¥ ID.
 - **Parametrar:**
   - **Path Parameter:**
-    - `id` (string): ID för produkten som ska raderas.
+    - `id` (string): ID fÃ¶r produkten som ska raderas.
 - **Request:**
-  - Ingen body behövs.
+  - Ingen body behÃ¶vs.
 - **Response:**
   - **204 No Content:** Produkten har raderats.
   - **404 Not Found:** Om produkten inte hittas.
@@ -114,15 +127,15 @@ Detta API hanterar CRUD-operationer (Create, Read, Update, Delete) för `Product`
 ---
 
 ## **Felhantering**
-Alla endpoints kan returnera följande generiska felkoder:
-- **400 Bad Request:** När ogiltiga data skickas i förfrågan.
-- **404 Not Found:** När en resurs inte hittas.
-- **500 Internal Server Error:** Vid oväntade fel i servern.
+Alla endpoints kan returnera fÃ¶ljande generiska felkoder:
+- **400 Bad Request:** NÃ¤r ogiltiga data skickas i fÃ¶rfrÃ¥gan.
+- **404 Not Found:** NÃ¤r en resurs inte hittas.
+- **500 Internal Server Error:** Vid ovÃ¤ntade fel i servern.
 
 ---
 
-## **Exempel på cURL-kommandon**
+## **Exempel pÃ¥ cURL-kommandon**
 
-### Hämta alla produkter:
+### HÃ¤mta alla produkter:
 ```bash
 curl -X GET http://localhost:5000/products
