@@ -8,7 +8,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
 {
     public class MessageConsumerService : IMessageConsumerService
     {
-        private const string _queueName = "final-order-to";
+        private const string _queueName = "order-to-product";
         private readonly IConnection _connection;
         private readonly IChannel _channel;
         private readonly ProductService _productServices;
@@ -38,7 +38,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
             };
 
             
-            await _channel.BasicConsumeAsync(queue: "final-order-to",
+            await _channel.BasicConsumeAsync(queue: "order-to-product",
                                  autoAck: true,
                                  consumer: consumer);
 

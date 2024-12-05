@@ -20,8 +20,7 @@ namespace MetaCortex.Products.API.Endpoints
 
             return app;
         }
-
-        public static async Task<IResult> CreateProduct(IProductRepository repo, Product product, IMessageProducerService message, IMessageConsumerService respons)
+        public static async Task<IResult> CreateProduct(IProductRepository repo, Product product, IMessageProducerService message)
         {
             var createdProduct = await repo.CreateProduct(product);
             await message.SendProductAsync(product);
