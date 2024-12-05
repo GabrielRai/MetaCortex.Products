@@ -43,5 +43,10 @@ namespace MetaCortex.Products.DataAccess.Repository
         {
             await _products.DeleteOneAsync(p => p.Id == id);
         }
+
+        public async Task UpdateProductOrderStock(string id, int quantity)
+        {
+            await _products.UpdateOneAsync(p => p.Id == id, Builders<Product>.Update.Inc(p => p.OrderStock, quantity));
+        }
     }
 }

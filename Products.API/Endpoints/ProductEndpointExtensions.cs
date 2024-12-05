@@ -1,6 +1,7 @@
 ﻿
 using MetaCortex.Products.DataAccess.Class;
 using MetaCortex.Products.DataAccess.Interface;
+using MetaCortex.Products.DataAccess.RabbitMq;
 using MongoDB.Bson;
 
 namespace MetaCortex.Products.API.Endpoints
@@ -20,9 +21,10 @@ namespace MetaCortex.Products.API.Endpoints
             return app;
         }
 
-        public static async Task<IResult> CreateProduct(IProductRepository repo, Product product)
+        public static async Task<IResult> CreateProduct(IProductRepository repo, Product product, IMessageProducerService message, IMessageConsumerService respons)
         {
             var createdProduct = await repo.CreateProduct(product);
+            await message.SendProductAsync(product);
             return Results.Created($"/api/products/{createdProduct.Id}", createdProduct);
         }
         public static async Task<IResult> GetProductById(IProductRepository repo, string Id)
