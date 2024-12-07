@@ -34,5 +34,5 @@ jobs:
       # Bygg och pusha Docker-image
       - name: Build and push Docker image
         run: |
-          docker build -t ghcr.io/gabrielrai/metacortex-products:latest .
+          docker build -f Products.API/Dockerfile -t ghcr.io/gabrielrai/metacortex-products:latest .
           docker push ghcr.io/gabrielrai/metacortex-products:latest
