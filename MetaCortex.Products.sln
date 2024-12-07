@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaCortex.Products.DataAcc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{242B2C19-F382-45E7-B86D-902C82E4FA44}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		.github\workflows\docker-image.yml = .github\workflows\docker-image.yml
+		Products.API\Dockerfile = Products.API\Dockerfile
 		README.md = README.md
 	EndProjectSection
 EndProject
