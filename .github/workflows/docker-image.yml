@@ -1,7 +1,6 @@
 name: Build and Publish Docker Image
 
 on:
-  # Workflow triggas vid push till `master`-branch eller vid pull request
   push:
     branches:
       - master
@@ -14,21 +13,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checka ut koden från repositoryt
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Logga in på GitHub Container Registry med GITHUB_TOKEN
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.SECRET_ }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Sätt upp .NET miljö
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0
 
+      # Bygg och pusha Docker-image
       - name: Build and push Docker image
         run: |
           docker build -t ghcr.io/${{ github.repository_owner }}/metacortex-products:latest .
