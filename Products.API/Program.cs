@@ -32,7 +32,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello World!!");
 app.MapProductEndpoints();
 
 app.Run();
