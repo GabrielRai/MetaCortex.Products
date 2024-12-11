@@ -33,7 +33,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
             {
                 var body = ea.Body.ToArray();
                 var message = System.Text.Encoding.UTF8.GetString(body);
-                await _productServices.UpdateProductOrderStock(message);
+                //await _productServices.UpdateProductOrderStock(message);
                 Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
 

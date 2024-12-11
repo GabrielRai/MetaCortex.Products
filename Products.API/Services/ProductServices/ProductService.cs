@@ -14,24 +14,24 @@ namespace MetaCortex.Products.API.Services.ProductServices
 
         public async Task UpdateProductOrderStock(string product)
         {
-            try
-            {
-                var products = JsonSerializer.Deserialize<List<ProductDto>>(product);
+            //try
+            //{
+            //    var products = JsonSerializer.Deserialize<List<ProductDto>>(product);
 
-                if (products == null)
-                {
-                    throw new Exception("Error deserializing product");
-                }
+            //    if (products == null)
+            //    {
+            //        throw new Exception("Error deserializing product");
+            //    }
 
-                foreach (var p in products)
-                {
-                    await _productRepository.UpdateProductOrderStock(p.Name, p.Quantity);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //    foreach (var p in products)
+            //    {
+            //        await _productRepository.UpdateProductOrderStock(p.Name, p.Quantity);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
     }
 }
