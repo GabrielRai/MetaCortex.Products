@@ -37,7 +37,6 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
                 Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
 
-            
             await _channel.BasicConsumeAsync(queue: "order-to-product",
                                  autoAck: true,
                                  consumer: consumer);
@@ -62,7 +61,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
                 Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
 
-            await _channel.BasicConsumeAsync(queue: "Product-added",
+            await _channel.BasicConsumeAsync(queue: "product-added",
                                  autoAck: true,
                                  consumer: consumer);
 
