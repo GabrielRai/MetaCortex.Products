@@ -17,9 +17,15 @@ namespace MetaCortex.Products.API.Services.ProductServices
             try
             {
                 var products = JsonSerializer.Deserialize<List<ProductDto>>(product);
+
+                if (products == null)
+                {
+                    throw new Exception("Error deserializing product");
+                }
+
                 foreach (var p in products)
                 {
-                    await _productRepository.UpdateProductOrderStock(p.Id, p.Quantity);
+                    await _productRepository.UpdateProductOrderStock(p.Name, p.Quantity);
                 }
             }
             catch (Exception ex)

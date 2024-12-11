@@ -15,6 +15,6 @@ namespace MetaCortex.Products.DataAccess.Interface
         Task<Product> CreateProduct(Product product);
         Task UpdateProduct(string id, Product product);
         Task DeleteProduct(string id);
-        Task UpdateProductOrderStock(string id, int quantity);
+        Task UpdateProductOrderStock(string name, int quantity);
     }
 }
