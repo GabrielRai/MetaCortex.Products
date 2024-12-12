@@ -3,6 +3,7 @@ using MetaCortex.Products.DataAccess.RabbitMq;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using MetaCortex.Products.API.Services.ProductServices;
+using MetaCortex.Products.API.BackgroundServices;
 
 namespace MetaCortex.Products.API.Services.RabbitMqServices
 {
