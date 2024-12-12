@@ -27,7 +27,7 @@ namespace MetaCortex.Products.API.Services.ProductServices
                 
                 foreach (var p in products)
                 {
-                  await _productRepository.UpdateProductOrderStock(p.Name, p.Quantity);
+                    await _productRepository.UpdateProductOrderStock(p.Name, p.Quantity);
                 }
             }
             catch (Exception ex)
