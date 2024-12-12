@@ -9,6 +9,6 @@ namespace MetaCortex.Products.DataAccess.RabbitMq
     public interface IMessageConsumerService
     {
         //Task ReadMessagesAsync(string queueName, Func<string, Task>);
-        Task ReadFinalOrderAsync();
+        Task ReadFinalOrderAsync(string queue);
     }
 }
