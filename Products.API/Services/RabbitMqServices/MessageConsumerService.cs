@@ -18,16 +18,18 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
             _connection = rabbitMqService.CreateConnection().Result;
             _channel = _connection.CreateChannelAsync().Result;
             _productServices = new ProductService();
-            _channel.QueueDeclareAsync(queue: _queueName,
-                                  durable: false,
-                                  exclusive: false,
-                                  autoDelete: false,
-                                  arguments: null).Wait();
+         
         }
 
         public async Task ReadFinalOrderAsync()
         {
             var consumer = new AsyncEventingBasicConsumer(_channel);
+
+           await _channel.QueueDeclareAsync(queue: _queueName,
+                               durable: false,
+                               exclusive: false,
+                               autoDelete: false,
+                               arguments: null);
 
             consumer.ReceivedAsync += async (model, ea) =>
             {
