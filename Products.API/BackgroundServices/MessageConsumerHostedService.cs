@@ -43,13 +43,14 @@ public class MessageConsumerHostedService : BackgroundService
                     var body = ea.Body.ToArray();
                     var message = System.Text.Encoding.UTF8.GetString(body);
                     await _productServices.UpdateProductOrderStock(message);
-        
+                    _logger.LogInformation($"{message}");
+
                 };
                 await _channel.BasicConsumeAsync(queue: "order-to-products",
                                      autoAck: true,
                                      consumer: consumer);
 
-                _logger.LogInformation("Message Consumed.");
+                
                 await Task.CompletedTask;
 
             }
