@@ -7,6 +7,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
 {
     public class MessageProducerService(RabbitMqConfiguration config) : IMessageProducerService
     {
+        private ILogger<MessageProducerService> _logger;
         private readonly ConnectionFactory _connectionFactory = new ConnectionFactory
         {
             HostName = config.HostName,
@@ -31,6 +32,8 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
             await channel.BasicPublishAsync(exchange: "",
                                  routingKey: "product-to-customer",
                                  body: body);
+
+            _logger.LogInformation(" [x] Sent {0}", message);
         }
     }
 }
