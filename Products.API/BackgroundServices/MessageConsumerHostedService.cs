@@ -28,15 +28,9 @@ public class MessageConsumerHostedService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("MessageConsumerHostedService is starting.");
-
-        while (!stoppingToken.IsCancellationRequested)
-        {
-           
-            try
+           try
             {
-
                 var consumer = new AsyncEventingBasicConsumer(_channel);
-                _logger.LogInformation("Testing.");
                 await _channel.QueueDeclareAsync(queue: _queueName,
                                    durable: false,
                                    exclusive: false,
@@ -63,9 +57,7 @@ public class MessageConsumerHostedService : BackgroundService
                 _logger.LogError(ex, "Error occurred in MessageConsumerHostedService.");
             }
 
-            // Lägg till en liten fördröjning för att undvika tight loop vid fel
-            await Task.Delay(1000, stoppingToken);
-        }
+        await Task.Delay(1000, stoppingToken);
 
         _logger.LogInformation("MessageConsumerHostedService is stopping.");
     }
