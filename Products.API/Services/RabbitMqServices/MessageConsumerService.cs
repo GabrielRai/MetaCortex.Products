@@ -12,7 +12,6 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
         private readonly IConnection _connection;
         private readonly IChannel _channel;
         private readonly ProductService _productServices;
-        private readonly ILogger<MessageConsumerService> _logger;
 
         public MessageConsumerService(IRabbitMqService rabbitMqService)
         {
@@ -35,7 +34,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
                 var body = ea.Body.ToArray();
                 var message = System.Text.Encoding.UTF8.GetString(body);
                 await _productServices.UpdateProductOrderStock(message);
-                _logger.LogInformation(" [x] Consumed {0}", message, "Consumed");
+                Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
             await _channel.BasicConsumeAsync(queue: "order-to-products",
                                  autoAck: true,
