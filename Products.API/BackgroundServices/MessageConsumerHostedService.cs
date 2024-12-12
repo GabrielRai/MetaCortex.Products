@@ -28,6 +28,7 @@ public class MessageConsumerHostedService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("MessageConsumerHostedService is starting.");
+
            try
             {
                 var consumer = new AsyncEventingBasicConsumer(_channel);
@@ -42,7 +43,7 @@ public class MessageConsumerHostedService : BackgroundService
                     var body = ea.Body.ToArray();
                     var message = System.Text.Encoding.UTF8.GetString(body);
                     await _productServices.UpdateProductOrderStock(message);
-                    Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
+        
                 };
                 await _channel.BasicConsumeAsync(queue: "order-to-products",
                                      autoAck: true,
