@@ -10,22 +10,25 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
     {
         private const string _queueName = "order-to-products";
         private readonly IConnection _connection;
+        private readonly ILogger<MessageConsumerHostedService> _logger;
         private readonly IChannel _channel;
         private readonly ProductService _productServices;
 
-        public MessageConsumerService(IRabbitMqService rabbitMqService)
+        public MessageConsumerService(IRabbitMqService rabbitMqService, ILogger<MessageConsumerHostedService> logger)
         {
             _connection = rabbitMqService.CreateConnection().Result;
             _channel = _connection.CreateChannelAsync().Result;
             _productServices = new ProductService();
-         
+            _logger = logger;
+
         }
 
         public async Task ReadFinalOrderAsync()
         {
-            var consumer = new AsyncEventingBasicConsumer(_channel);
-
-           await _channel.QueueDeclareAsync(queue: _queueName,
+        
+           var consumer = new AsyncEventingBasicConsumer(_channel);
+            _logger.LogInformation("Testing.");
+            await _channel.QueueDeclareAsync(queue: _queueName,
                                durable: false,
                                exclusive: false,
                                autoDelete: false,
