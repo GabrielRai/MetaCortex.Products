@@ -7,6 +7,7 @@ using MetaCortex.Products.DataAccess.Repository;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MetaCortex.Products.API.Services.RabbitMqServices;
+using MetaCortex.Products.API.BackgroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
