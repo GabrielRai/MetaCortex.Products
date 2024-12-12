@@ -11,6 +11,7 @@ namespace MetaCortex.Products.API.BackgroundServices
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            Console.WriteLine("MessageConsumerHostedService is starting.");
             await _messageConsumerService.ReadFinalOrderAsync();
         }
     }
