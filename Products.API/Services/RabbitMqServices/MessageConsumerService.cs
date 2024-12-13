@@ -43,7 +43,11 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
                 Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
 
-            await _productServices.UpdateProductOrderStock(message);
+            if (message != null)
+            {
+
+                await _productServices.UpdateProductOrderStock(message);
+            }
 
             await _channel.BasicConsumeAsync(queue: "order-to-products",
                                  autoAck: true,
