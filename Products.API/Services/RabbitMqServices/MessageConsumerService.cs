@@ -24,12 +24,12 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
 
         }
 
-        public async Task ReadFinalOrderAsync(string q)
+        public async Task ReadFinalOrderAsync()
         {
         
            var consumer = new AsyncEventingBasicConsumer(_channel);
             _logger.LogInformation("Testing.");
-            await _channel.QueueDeclareAsync(queue: q,
+            await _channel.QueueDeclareAsync(queue: _queueName,
                                durable: false,
                                exclusive: false,
                                autoDelete: false,

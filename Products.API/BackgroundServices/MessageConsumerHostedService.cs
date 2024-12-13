@@ -13,9 +13,8 @@ namespace MetaCortex.Products.API.BackgroundServices
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var queue = "order-to-products";
             _logger.LogInformation("MessageConsumerHostedService is starting.");
-            await _messageConsumerService.ReadFinalOrderAsync(queue);
+            await _messageConsumerService.ReadFinalOrderAsync();
         }
     }
 }
