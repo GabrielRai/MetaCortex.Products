@@ -9,9 +9,11 @@ namespace MetaCortex.Products.API.Services.ProductServices
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly ILogger _logger;
+        public ProductService(IProductRepository productRepository, ILogger logger)
         {
             _productRepository = productRepository;
+            _logger = logger;
         }
         public async Task UpdateProductOrderStock(string product)
         {
@@ -32,22 +34,22 @@ namespace MetaCortex.Products.API.Services.ProductServices
                 {
                     if (p == null || string.IsNullOrEmpty(p.Name) || p.Quantity <= 0)
                     {
-                        Console.WriteLine($"Skipping invalid product: {p?.Name ?? "Unknown"} (Quantity: {p?.Quantity ?? 0})");
+                        _logger.LogInformation($"Skipping invalid product: {p?.Name ?? "Unknown"} (Quantity: {p?.Quantity ?? 0})");
                         continue;
                     }
 
                     await _productRepository.UpdateProductOrderStock(p.Name, p.Quantity);
-                    Console.WriteLine($"Product {p.Name} updated with quantity {p.Quantity}");
+                    _logger.LogInformation($"Product {p.Name} updated with quantity {p.Quantity}");
                 }
             }
             catch (JsonException ex)
             {
-                Console.WriteLine($"JSON deserialization failed: {ex.Message}");
+                _logger.LogInformation($"JSON deserialization failed: {ex.Message}");
                 throw new Exception("Failed to parse product JSON.", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                _logger.LogInformation($"An error occurred: {ex.Message}");
                 throw;
             }
         }
