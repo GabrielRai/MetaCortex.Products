@@ -16,11 +16,11 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
         private readonly ProductService _productServices;
         private string message;
 
-        public MessageConsumerService(IRabbitMqService rabbitMqService, ILogger<MessageConsumerHostedService> logger)
+        public MessageConsumerService(IRabbitMqService rabbitMqService, ILogger<MessageConsumerHostedService> logger, ProductService productService)
         {
             _connection = rabbitMqService.CreateConnection().Result;
             _channel = _connection.CreateChannelAsync().Result;
-            _productServices = new ProductService();
+            _productServices = productService;
             _logger = logger;
 
         }
