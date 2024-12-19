@@ -32,7 +32,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
                                  routingKey: "product-to-customer",
                                  body: body);
 
-            Console.WriteLine(" [x] Sent information about newly-added products.");
+            Console.WriteLine(" [x] Sent information about newly-added product.");
         }
     }
 }
