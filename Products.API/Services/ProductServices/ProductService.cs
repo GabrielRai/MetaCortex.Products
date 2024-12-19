@@ -8,9 +8,9 @@ namespace MetaCortex.Products.API.Services.ProductServices
     public class ProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService()
+        public ProductService(IProductRepository productRepository)
         {
-          
+            _productRepository = productRepository;
         }
 
         public async Task UpdateProductOrderStock(string product)
