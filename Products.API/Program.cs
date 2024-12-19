@@ -20,14 +20,14 @@ builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
 });
 
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection("RabbitMqConfiguration"));
 builder.Services.AddSingleton<RabbitMqConfiguration>(sp =>
     sp.GetRequiredService<IOptions<RabbitMqConfiguration>>().Value);
 
 builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
 builder.Services.AddSingleton<IMessageProducerService, MessageProducerService>();
-builder.Services.AddSingleton<IMessageConsumerService, MessageConsumerService>();
-builder.Services.AddScoped<ProductService>();
+builder.Services.AddSingleton<IMessageConsumerService, MessageConsumerService>();;
 builder.Services.AddHostedService<MessageConsumerHostedService>();
 var app = builder.Build();
 

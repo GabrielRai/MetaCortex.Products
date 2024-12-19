@@ -1,11 +1,12 @@
 ﻿using MetaCortex.Products.API.Dtos;
+using MetaCortex.Products.API.Services.Interfaces;
 using MetaCortex.Products.DataAccess.Interface;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace MetaCortex.Products.API.Services.ProductServices
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
         public ProductService(IProductRepository productRepository)
