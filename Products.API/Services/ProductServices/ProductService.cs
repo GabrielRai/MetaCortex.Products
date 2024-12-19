@@ -1,4 +1,5 @@
-﻿using MetaCortex.Products.API.Dtos;
+﻿using MetaCortex.Products.API.BackgroundServices;
+using MetaCortex.Products.API.Dtos;
 using MetaCortex.Products.API.Services.Interfaces;
 using MetaCortex.Products.DataAccess.Interface;
 using System.Text.Json;
@@ -9,8 +10,8 @@ namespace MetaCortex.Products.API.Services.ProductServices
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        private readonly ILogger _logger;
-        public ProductService(IProductRepository productRepository, ILogger logger)
+        private readonly ILogger<MessageConsumerHostedService> _logger;
+        public ProductService(IProductRepository productRepository, ILogger<MessageConsumerHostedService> logger)
         {
             _productRepository = productRepository;
             _logger = logger;
