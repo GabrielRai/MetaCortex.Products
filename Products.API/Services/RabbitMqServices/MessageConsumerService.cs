@@ -44,7 +44,7 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
                 {
                     await _productServices.UpdateProductOrderStock(message);
                 }
-                //Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
+                Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
 
           
