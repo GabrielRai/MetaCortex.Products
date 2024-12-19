@@ -40,13 +40,14 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
             {
                 var body = ea.Body.ToArray();
                 message = System.Text.Encoding.UTF8.GetString(body);
+                if (message != null)
+                {
+                    await _productServices.UpdateProductOrderStock(message);
+                }
                 //Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
 
-            if (message != null)
-            {
-                await _productServices.UpdateProductOrderStock(message);
-            }
+          
 
             await _channel.BasicConsumeAsync(queue: "order-to-products",
                                  autoAck: true,
