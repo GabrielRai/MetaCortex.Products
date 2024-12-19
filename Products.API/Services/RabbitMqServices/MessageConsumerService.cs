@@ -42,12 +42,10 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
                 message = System.Text.Encoding.UTF8.GetString(body);
                 if (message != null)
                 {
+                    Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
                     await _productServices.UpdateProductOrderStock(message);
                 }
-                Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
-
-          
 
             await _channel.BasicConsumeAsync(queue: "order-to-products",
                                  autoAck: true,
