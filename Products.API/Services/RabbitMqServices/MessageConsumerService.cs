@@ -40,12 +40,11 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
             {
                 var body = ea.Body.ToArray();
                 message = System.Text.Encoding.UTF8.GetString(body);
-                Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
+                //Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
             };
 
             if (message != null)
             {
-
                 await _productServices.UpdateProductOrderStock(message);
             }
 

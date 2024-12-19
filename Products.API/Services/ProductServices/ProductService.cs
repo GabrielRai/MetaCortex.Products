@@ -19,6 +19,7 @@ namespace MetaCortex.Products.API.Services.ProductServices
             {
              
                 var products = JsonSerializer.Deserialize<List<ProductDto>>(product);
+                Console.WriteLine(products);
 
                 if (products == null)
                 {
