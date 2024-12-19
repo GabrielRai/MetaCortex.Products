@@ -29,7 +29,6 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
         {
         
            var consumer = new AsyncEventingBasicConsumer(_channel);
-            _logger.LogInformation("Testing.");
             await _channel.QueueDeclareAsync(queue: _queueName,
                                durable: false,
                                exclusive: false,
@@ -40,38 +39,15 @@ namespace MetaCortex.Products.API.Services.RabbitMqServices
             {
                 var body = ea.Body.ToArray();
                 message = System.Text.Encoding.UTF8.GetString(body);
+
                 if (message != null)
                 {
-                    Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
+                    _logger.LogInformation("[x] Consumed Order, updating stock");
                     await _productServices.UpdateProductOrderStock(message);
                 }
             };
 
             await _channel.BasicConsumeAsync(queue: "order-to-products",
-                                 autoAck: true,
-                                 consumer: consumer);
-
-            await Task.CompletedTask;
-        }
-
-        public async Task ReadMessagesAsync(string queueName, Func<string,Task> messageProcessor)
-        {
-            await _channel.QueueDeclareAsync(queue: _queueName,
-             durable: false,
-             exclusive: false,
-             autoDelete: false
-             );
-
-            var consumer = new AsyncEventingBasicConsumer(_channel);
-
-            consumer.ReceivedAsync += async (model, ea) =>
-            {
-                var body = ea.Body.ToArray();
-                var message = System.Text.Encoding.UTF8.GetString(body);
-                Console.WriteLine(" [x] Consumed {0}", message, "Consumed");
-            };
-
-            await _channel.BasicConsumeAsync(queue: "product-added",
                                  autoAck: true,
                                  consumer: consumer);
 
