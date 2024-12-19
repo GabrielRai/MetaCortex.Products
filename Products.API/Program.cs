@@ -20,7 +20,7 @@ builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
 });
 
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
-builder.Services.AddSingleton<IProductService, ProductService>();
+builder.Services.AddScoped<ProductService>();
 builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection("RabbitMqConfiguration"));
 builder.Services.AddSingleton<RabbitMqConfiguration>(sp =>
     sp.GetRequiredService<IOptions<RabbitMqConfiguration>>().Value);
