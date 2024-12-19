@@ -2,7 +2,7 @@
 
 This repository is part of a group project where we are developing a distributed application composed of several microservices. Each team member is responsible for a specific part of the system:
 
-- MetaCortex.Customers - Maintained by me, responsible for customer management (this repository).
+- MetaCortex.Products - Maintained by me, responsible for customer management (this repository).
 - [MetaCortex.Orders](https://github.com/anders0b/MetaCortex.Orders) - Maintained by [Anders0b](https://github.com/anders0b), responsible for order management.
 - [MetaCortex.Customers](https://github.com/JesperWhendin/MetaCortex.Customers) - Maintained by [JesperWendin](https://github.com/JesperWendin), responsible for customer information.
 - [MetaCortex.Payments](https://github.com/Heimbrand/MetaCortex.Payments) - Maintained by [Heimbrand](https://github.com/Heimbrand), responsible for handling payments.
