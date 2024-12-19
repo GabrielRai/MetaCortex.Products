@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MetaCortex.Products.API.Services.RabbitMqServices;
 using MetaCortex.Products.API.BackgroundServices;
+using MetaCortex.Products.API.Services.ProductServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.AddSingleton<RabbitMqConfiguration>(sp =>
 builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
 builder.Services.AddSingleton<IMessageProducerService, MessageProducerService>();
 builder.Services.AddSingleton<IMessageConsumerService, MessageConsumerService>();
+builder.Services.AddScoped<ProductService>();
 builder.Services.AddHostedService<MessageConsumerHostedService>();
 var app = builder.Build();
 
